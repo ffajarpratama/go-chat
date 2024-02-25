@@ -4,7 +4,6 @@ import "net/http"
 
 type JwtKey string
 
-// default error Code
 const (
 	UserIDKey JwtKey = "userID"
 	RoleKey   JwtKey = "role"

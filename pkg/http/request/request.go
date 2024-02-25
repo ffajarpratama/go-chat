@@ -13,13 +13,13 @@ type Query struct {
 }
 
 const (
-	DEFAULT_PAGE     = 1
-	DEFAULT_PER_PAGE = 20
+	DefaultPage  int = 1
+	DefaultLimit int = 20
 )
 
 func NewBaseQuery(r *http.Request) Query {
-	page := DEFAULT_PAGE
-	limit := DEFAULT_PER_PAGE
+	page := DefaultPage
+	limit := DefaultLimit
 
 	if r.URL.Query().Get("page") != "" {
 		page, _ = strconv.Atoi(r.URL.Query().Get("page"))

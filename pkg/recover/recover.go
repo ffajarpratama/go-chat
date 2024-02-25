@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	MAX_BYTE = 2084
+	MaxByteSize = 2084
 )
 
 type PanicJsonResponse struct {
@@ -31,7 +31,7 @@ func RecoverWrap(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
-				buf := make([]byte, MAX_BYTE)
+				buf := make([]byte, MaxByteSize)
 				n := runtime.Stack(buf, false)
 				buf = buf[:n]
 
