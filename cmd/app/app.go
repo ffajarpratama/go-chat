@@ -9,7 +9,7 @@ import (
 
 	"github.com/ffajarpratama/go-chat/config"
 	"github.com/ffajarpratama/go-chat/internal/repository"
-	"github.com/ffajarpratama/go-chat/internal/transporter"
+	http_transporter "github.com/ffajarpratama/go-chat/internal/transporter/http"
 	"github.com/ffajarpratama/go-chat/internal/usecase"
 	"github.com/ffajarpratama/go-chat/pkg/postgres"
 	"github.com/ffajarpratama/go-chat/pkg/util"
@@ -27,8 +27,8 @@ func StartServer() (err error) {
 
 	repo := repository.New(db)
 	uc := usecase.New(repo)
-	handler := transporter.NewV1HttpTransporter(uc)
+	httpHandler := http_transporter.NewHttpTransporter(uc)
 
 	log.Println("server started on:", cnf.App.URL)
-	return http.ListenAndServe(fmt.Sprintf(":%d", cnf.App.Port), handler)
+	return http.ListenAndServe(fmt.Sprintf(":%d", cnf.App.Port), httpHandler)
 }

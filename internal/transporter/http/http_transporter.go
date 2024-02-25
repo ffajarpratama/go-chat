@@ -1,4 +1,4 @@
-package transporter
+package http
 
 import (
 	"encoding/json"
@@ -16,7 +16,7 @@ import (
 	go_validator "github.com/go-playground/validator/v10"
 )
 
-func NewV1HttpTransporter(uc *usecase.Usecase) http.Handler {
+func NewHttpTransporter(uc *usecase.Usecase) http.Handler {
 	r := chi.NewRouter()
 	v := custom_validator.New(go_validator.New())
 

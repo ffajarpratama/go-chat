@@ -1,6 +1,8 @@
 package ws
 
 import (
+	"fmt"
+
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 )
@@ -36,7 +38,11 @@ func (c *Client) Read(hub *Hub) {
 		var msg *Message
 		err := c.Conn.ReadJSON(&msg)
 		if err != nil {
-			return
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+				fmt.Printf("err: %v\n", err)
+			}
+
+			break
 		}
 
 		hub.BroadcastChan <- msg
